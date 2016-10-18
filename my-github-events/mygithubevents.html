@@ -1,0 +1,29 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My GitHub Events</title>
+  <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="mygithubevents.js"></script>
+</head>
+
+<body>
+<form name="handle_submit_form" action="#" onsubmit="doSubmit();">
+  Progress for GitHub handle <input type="text" name="github_handle">
+  page <input type="text" name="events_page" value="">
+  <input type="submit">
+</form>
+
+<hr>
+
+<table id="eventslist">
+  <tr>
+    <th>Event</th>
+    <th>Timestamp</th>
+    <th>Details</th>
+    <th>URL</th>
+  </tr>
+</table>
+
+</body>
+</html>
+
