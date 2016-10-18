@@ -2,8 +2,8 @@ function process_events_list(events_list) {
   var return_events = [];
   for (event_index in events_list) {
     e = events_list[event_index];
-    /* Process events from the events list, return a list of
-     * details about the contained event(s).
+    /* Process events from the events list, add details
+     * about the contained event(s) to the output table.
      */
     var event_type;
     var repo_name = e["repo"]["name"];  // Note that this includes the handle
@@ -72,12 +72,12 @@ function process_events_list(events_list) {
   }
 
   for (event_index in return_events) {
-    add_to_div(return_events[event_index]);
+    add_to_output_table(return_events[event_index]);
   }
 }
 
 
-function add_to_div(e) {
+function add_to_output_table(e) {
   var event_type = e[0];
   var timestamp = e[1];
   var message = e[2];
@@ -93,15 +93,13 @@ function doSubmit() {
   // Get the GitHub handle from the form
   var github_handle = document.handle_submit_form.github_handle.value;
   var events_page = document.handle_submit_form.events_page.value;
-  // Get the JSON events data
+  // Get the JSON events data and have it processed
   var events_url = "https://api.github.com/users/" + github_handle + "/events";
   if (events_page != "") {
     events_url += "?page=" + events_page;
   }
   jQuery.getJSON(events_url, process_events_list);
 
-  // Turn into a table
-  // Append to div
-  //eventslist = document.getElementById("eventslist");
+  // Don't reload the page when the control flow leaves this function
   return false;
 }
