@@ -80,6 +80,23 @@ function process_events_list(events_list) {
         return_events.push([event_type, timestamp, repo_name + " "+ what_name, "https://github.com/" + repo_name]);
         break;
 
+      case "CommitCommentEvent":
+        event_type = "commented on commit";
+        var comment = e["payload"]["comment"];
+        var body = comment["body"];
+        var html_url = comment["html_url"];
+        return_events.push([event_type, timestamp,
+            e["repo"]["name"] + ": " + body, html_url]);
+        break;
+
+      case "WatchEvent":
+        // "started" or "stopped" watching it is
+        event_type = e["payload"]["action"] + " watching";
+        var repo_name = e["repo"]["name"];
+        return_events.push([event_type, timestamp,
+            repo_name, "https://github.com/" + repo_name]);
+        break;
+
       default:
         console.log("Yet-unhandled type " + e["type"]);
         return_events.push([e["type"], "ID " + e["id"], "???", "???"]);
