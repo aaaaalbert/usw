@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
+# -*- coding: utf8 -*-
 LOGDATEI = "stoppuhrlog.csv"
 SEPARATOR = ";"
 
@@ -33,8 +33,9 @@ thema = sys.argv[1]
 
 with open(LOGDATEI, "a") as log:
     startzeit = int(time.time())
+    print("Los geht's um", startzeit)
     tätigkeit = input("Bitte Tätigkeit eingeben (Enter stoppt die Stoppuhr): ")
     dauer = int(time.time() - startzeit)
     log.write(SEPARATOR.join([str(startzeit), str(dauer), thema, tätigkeit]) + "\n")
-    print("Passt, danke!")
+    print("Das waren so an die", int(dauer/60), "Minuten. Passt, danke!")
 
